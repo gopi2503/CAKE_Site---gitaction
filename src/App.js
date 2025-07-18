@@ -489,7 +489,7 @@ function App() {
                 <div className="contact-icon-small">📱</div>
                 <div>
                   <h4>Phone</h4>
-                  <a href="tel:9962607717" className="contact-link-small">9962607717</a>
+                  <a href="tel:9600196038" className="contact-link-small">9600196038</a>
                   <p>Call or WhatsApp</p>
                 </div>
               </div>
