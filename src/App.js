@@ -71,7 +71,7 @@ function App() {
                 <div className="contact-icon-small">📱</div>
                 <div>
                   <h4>Phone</h4>
-                  <a href="tel:9600196038" className="contact-link-small">9600196038</a>
+                  <a href="tel:9962607717" className="contact-link-small">9962607717</a>
                   <p>Call or WhatsApp</p>
                 </div>
               </div>
@@ -113,10 +113,10 @@ function App() {
 
             <div className="contact-modal-footer">
               <button className="close-modal" onClick={() => setShowContactPopup(false)}>Close</button>
-              <button className="quick-call-btn" onClick={() => window.open('tel:9600196038')}>
+              <button className="quick-call-btn" onClick={() => window.open('tel:9962607717')}>
                 📞 Call Now
               </button>
-              <button className="quick-whatsapp-btn" onClick={() => window.open('https://wa.me/919600196038')}>
+              <button className="quick-whatsapp-btn" onClick={() => window.open('https://wa.me/919962607717')}>
                 💬 WhatsApp
               </button>
             </div>
@@ -268,8 +268,8 @@ function App() {
                   <h4>Contact Us</h4>
                 </div>
                 <div className="card-content">
-                  <a href="tel:9600196038" className="contact-link-enhanced">
-                    <span className="phone-number">9600196038</span>
+                  <a href="tel:9962607717" className="contact-link-enhanced">
+                    <span className="phone-number">9962607717</span>
                     <span className="call-text">Call Now</span>
                   </a>
                   <p className="contact-note">Available for orders & inquiries</p>
@@ -341,15 +341,15 @@ function App() {
               <p className="action-subtitle">Get in touch with us for fresh, delicious cakes!</p>
               
               <div className="action-buttons">
-                <a href="tel:9600196038" className="action-btn primary-btn">
+                <a href="tel:9962607717" className="action-btn primary-btn">
                   <span className="btn-icon">📞</span>
                   <div className="btn-content">
                     <div className="btn-text">Call Now</div>
-                    <div className="btn-subtext">9600196038</div>
+                    <div className="btn-subtext">9962607717</div>
                   </div>
                 </a>
                 
-                <a href="https://wa.me/919600196038" className="action-btn whatsapp-btn" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/919962607717" className="action-btn whatsapp-btn" target="_blank" rel="noopener noreferrer">
                   <span className="btn-icon">💬</span>
                   <div className="btn-content">
                     <div className="btn-text">WhatsApp</div>
