@@ -2,12 +2,9 @@ version: "3.8"
 
 services:
   frontend:
-    build: .
+    build:
+      context: .
+    container_name: cake-deployment_frontend
     ports:
       - "80:80"
-    networks:
-      - app-network
-
-networks:
-  app-network:
-
+    restart: always
