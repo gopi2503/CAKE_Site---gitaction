@@ -18,15 +18,10 @@ jobs:
       with:
         node-version: 18
 
-    - name: Install backend dependencies
-      run: |
-        cd backend
-        npm install
-
     - name: Install frontend dependencies
       run: |
-        cd frontend
         npm install
+        npm run build
 
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@v1.2
@@ -34,16 +29,25 @@ jobs:
         projectBaseDir: .
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: http://your_server_ip:9000
+        SONAR_HOST_URL: http://${{ secrets.SERVER_IP }}:9000
 
-    - name: Deploy using SSH
+    - name: Upload build to server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SERVER_IP }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: "./Dockerfile,./build,./docker-compose.yml"
+        target: "/home/${{ secrets.SERVER_USER }}/cake-deployment"
+
+    - name: Deploy on server
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SERVER_IP }}
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd /path/to/your/project
-          git pull origin main
-          docker-compose down
-          docker-compose up --build -d
+          cd cake-deployment
+          docker rm -f cake-frontend || true
+          docker build -t cake-frontend .
+          docker run -d -p 80:80 --name cake-frontend cake-frontend
