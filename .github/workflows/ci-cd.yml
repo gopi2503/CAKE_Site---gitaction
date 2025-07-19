@@ -1,0 +1,47 @@
+name: Cake CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build React app
+      run: npm run build
+
+    - name: SonarQube Scan
+      uses: sonarsource/sonarqube-scan-action@v1.2
+      with:
+        projectBaseDir: .
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: http://${{ secrets.SERVER_IP }}:9000
+
+    - name: Deploy to server via SSH
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_IP }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd cake-deployment || git clone https://github.com/gopi2503/CAKE_Site.git cake-deployment && cd cake-deployment
+          git pull origin main
+          docker rm -f cake-frontend || true
+          docker build -t cake-frontend .
+          docker run -d -p 80:80 --name cake-frontend cake-frontend
+
