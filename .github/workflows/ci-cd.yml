@@ -24,6 +24,10 @@ jobs:
         npm install
         echo "⚙️ Building React app..."
         npm run build
+        
+    - name: Echo IP to verify secret update
+      run: echo "Using SonarQube IP: http://${{ secrets.SERVER_IP }}:9000"
+
 
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@v2
